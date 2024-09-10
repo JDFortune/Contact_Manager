@@ -19,7 +19,6 @@ class Controller {
     this.view.bindFilterInput(this.toolbarInputEventHandler);
     this.view.bindMainClick(this.mainClickEventHandler.bind(this));
     this.view.bindSubmitForm(this.submitFormEventHandler.bind(this));
-    // this.view.bindHomeButton(this.homeClickEventHandler.bind(this));
     this.view.bindValidateInput(this.validateInputOnFocusOutHandler.bind(this));
   }
 

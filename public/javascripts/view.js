@@ -70,10 +70,6 @@ export class View {
     history.pushState({page_id: 1, user_id: 1}, title, path);
   }
 
-  resetFilteredContacts() {
-    this.filteredContacts = this.contactsCopy();
-  }
-
   registerTemplates() {
     document.querySelectorAll('[type$=handlebars]').forEach(script => {
       this.templates[script.id] = Handlebars.compile(script.innerHTML);
@@ -108,11 +104,8 @@ export class View {
     this.pushURL('/#contacts');
   }
 
-  renderAddContactForm() {
-    let newContactHTML = this.templates['form'](NEW_FORM);
-    this.clearMain();
-    this.addHTMLToMain(newContactHTML);
-    this.pushURL('/#contacts/add');
+  resetFilteredContacts() {
+    this.filteredContacts = this.contactsCopy();
   }
 
   resetToHome() {
@@ -148,7 +141,6 @@ export class View {
   }
 
   bindMainClick(handler) {
-    // this.main
     document.addEventListener('click', event => {
       handler(event);
     });
