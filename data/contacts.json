@@ -7,24 +7,24 @@
     "tags": "work,friend"
   },
   {
+    "id": 2,
+    "full_name": "Victor Reyes",
+    "email": "vpr@example.com",
+    "phone_number": "09876543210",
+    "tags": "work,friend"
+  },
+  {
     "id": 3,
-    "full_name": "Pete Hansel",
+    "full_name": "Pete Hanson",
     "email": "ph@example.com",
     "phone_number": "54321098761",
-    "tags": "phish"
+    "tags": null
   },
   {
-    "full_name": "Barry Allen",
-    "phone_number": "15555555555",
-    "email": "Ball@gmail.com",
-    "tags": "GoGo",
-    "id": 6
-  },
-  {
-    "full_name": "JD Mac'tierne",
-    "phone_number": "8888900981",
-    "email": "jad@pep.mail",
-    "tags": "goofy,goof",
-    "id": 8
+    "full_name": "JD Fortune",
+    "phone_number": "8702172600",
+    "email": "jondfortune@gmail.com",
+    "tags": "friend,work,shows",
+    "id": 4
   }
 ]
