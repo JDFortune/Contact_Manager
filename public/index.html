@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="stylesheets/reset.css">
+  <link rel="stylesheet" href="stylesheets/main.css">
+  <link rel="shortuct icon" href="data:image/x-icon;," type="image/x-icon">
+  <script src="/javascripts/jquery.js"></script>
+  <script src="/javascripts/handlebars.js"></script>
+</head>
+<body>
+  <header class="bs-header">
+    <div class="header">
+      <a href="#home" class="home-btn" data-type="home"><h1 data-type="home">Contact Manager</h1></a>
+      <p>Using some stuff</p>
+    </div>
+  </header>
+
+  
+  <div class="container toolbar" data-type="toolbar">
+      <a class="btn" href="/#contacts/add" data-type="add_contacts">Add Contact</a>
+      <input class="filter name-filter" data-type="search_filter" type="text" placeholder="Search">
+      <div class="tag-filter">
+      </div>
+      <ul class="tags-list">
+      </ul>
+  </div>
+
+  <!-- Dynamic Content Section -->
+  <main></main>
+
+  <div class="footer text-center">
+    <p>Developed by <a href="https://www.devsaran.com">Devsaran.com</a> and <a href="http://www.239listing.com">239 Listing Real Estate</a>.</p>
+  </div>
+
+  <script type="module" src="javascripts/controller.js"></script>
+</body>
+</html>
+
+<!-- Templates -->
+
+<!-- Contacts -->
+<script id="contacts" type="text/x-handlebars">
+  <ul class="contacts list">
+  {{#each contacts}}
+  {{> contact_item}}
+  {{/each}}
+  </ul>
+  <hr>
+</script>
+
+<script id="contact_item" data-type="partial" type="text/x-handlebars">
+  <li class="contact-card">
+    <div class="media-body">
+      <h3 class="name">{{full_name}}</h3>
+    </div>
+    <div class="media-body">
+      <dl>
+        <dt>Phone Number:</dt>
+        <dd class="phone_number">{{phone_number}}</dd>
+        <dt>Email:</dt>
+        <dd class="email">{{email}}</dd>
+      </dl>
+    </div>
+
+    <div class="media-body tags">
+      {{> tags_list}}
+    </div>
+
+    <div class="contact-btn-wrapper">
+      <a class="edit-contact btn btn-outline small-btn" data-type="edit" data-id={{id}} href="/api/contacts/{{id}}">
+        Edit
+      </a>
+      <a class="delete-contatct btn btn-outline small-btn" data-type="delete" data-id={{id}} href="/api/contacts/{{id}}">
+        Delete
+      </a>
+    </div>
+    <hr>
+  </li>
+</script>
+
+<!-- Tags -->
+<script id="tags_list" data-type="partial" type="text/x-handlebars">
+  <ul class="tags-list">
+    {{#each tags}}
+    {{> contact_tags}}
+    {{/each}}
+  </ul>
+</script>
+
+<script id="contact_tags" data-type="partial" type="text/x-handlebars">
+  <li class="tag"><a href="/#contacts/filter/tag/{{this}}" data-type="tag">{{this}}</a></li>
+</script>
+
+
+<!-- Message Templates -->
+<script id="no_contacts_message" data-type="partial" type="text/x-handlebars">
+  <div class="container message">
+    <div>
+      <h2>There are no contacts.</h2>
+      <a class="btn large-btn" href="/#contacts/add" data-type="add_contacts">Add Contact</a>
+    </div>
+  </div>
+</script>
+
+<script id="no_matching_contacts_message" data-type="partial" type="text/x-handlebars">
+    <div class="container">
+      <h2>There are no contacts matching <strong>{{value}}</strong>.</h2>
+    </div>
+</script>
+
+<!-- Create Contact -->
+<script id="form" type="text/x-handlebars">
+  <h2 class="form-title">{{title}}</h2>
+  <hr>
+  <form action="{{url}}" method="{{method}}">
+    <div class="form-group">
+      <label for="name">Full Name:</label>
+      <div class="form-input">
+        <input id="name" type="text" name="full_name" value="{{full_name}}" pattern="[A-Za-z ']+" required>
+        <small class="help-block" data-message="Name can only contain letters, spaces, and apostrophes"></small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email address:</label>
+      <div class="form-input">
+        <input id="email" type="email" name="email" value="{{email}}" pattern="\w+@\w+\.\w+" required>
+        <small class="help-block" data-message="Must be a valid Email"></small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="phone_number">Phone Number:</label>
+      <div class="form-input">
+        <input id="phone_number" type="text" name="phone_number" value="{{phone_number}}" pattern="\d{10,}" required>
+        <small class="help-block" data-message="Please input valid phone number"></small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="tags">Tags:</label>
+      <div class="form-input">
+        <input id="tags" type="text" name="tags" value="{{tags}}">
+        <small class="help-block"></small>
+      </div>
+    </div>
+      
+    <div class="form-group form-btns">
+      <button type="submit" class="btn wide-btn submit">Submit</button>
+      <button type="button" class="btn wide-btn cancel" data-type="cancel">Cancel</button>
+    </div>
+  </form>
+
+  <hr>
+</script>
+    
